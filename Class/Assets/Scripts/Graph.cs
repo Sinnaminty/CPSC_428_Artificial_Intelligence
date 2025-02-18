@@ -14,13 +14,13 @@ public class Graph : MonoBehaviour
     public static readonly Vector2[] allDirections =
     {
         new Vector2(0f, 1f),
-        new Vector2(1f, 1f),
+        new Vector2(1f, 1f), 
         new Vector2(1f, 0f),
         new Vector2(1f, -1f),
         new Vector2(0f, -1f),
         new Vector2(-1f, -1f),
         new Vector2(-1f, 0f),
-        new Vector2(-1f, -1f)
+        new Vector2(-1f, 1f)
     };
 
     public void Init(int[,] mapData)
@@ -29,15 +29,23 @@ public class Graph : MonoBehaviour
         m_width = mapData.GetLength(0);
         m_height = mapData.GetLength(1);
         nodes = new Node[m_width, m_height];
+
         for (int y = 0; y < m_height; y++)
         {
             for (int x = 0; x < m_width; x++)
             {
+                // get the nodeType of this coord from mapData
                 NodeType nodeType = (NodeType)mapData[x, y];
+
+                // make a node object
                 Node newNode = new Node(x, y, nodeType);
+
+                // our list of nodes is updated.
                 nodes[x, y] = newNode;
+                
+                //assign position to the node ??
                 newNode.position = new Vector3(x, 0, y);
-                Debug.Log("Node (" + newNode.position.x + ", " + newNode.position.z + ")"); 
+               
                 if (nodeType == NodeType.Blocked)
                 {
                     walls.Add(newNode);
@@ -70,7 +78,7 @@ public class Graph : MonoBehaviour
         {
             int newX = x + (int)dir.x;
             int newY = y + (int)dir.y;
-            Debug.Log("Newx = " + newX + " Newy = " + newY);
+            //Debug.Log("Newx = " + newX + " Newy = " + newY);
             if(IsWithinBounds(newX, newY) && NodeArray[newX, newY] !=null && NodeArray[newX,newY].nodeType != NodeType.Blocked)
             {
                 neighborNodes.Add(NodeArray[newX,newY]);

@@ -347,8 +347,10 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/GameController.cs"
 "Assets/Scripts/Graph.cs"
+"Assets/Scripts/GraphView.cs"
 "Assets/Scripts/MapData.cs"
 "Assets/Scripts/Node.cs"
+"Assets/Scripts/NodeView.cs"
 -langversion:9.0
 
 /deterministic
