@@ -14,4 +14,14 @@ public class NodeView : MonoBehaviour {
             Debug.LogWarning("NodeView::Init - tile == null!");
         }
     }
+    void ColorNode(Color color, GameObject gameObject) {
+        if(gameObject != null) {
+            Renderer gameObjectRenderer = gameObject.GetComponent<Renderer>();
+            gameObjectRenderer.material.color = color;
+        }
+    }
+    public void ColorNode(Color color) {
+        ColorNode(color, tile);
+    }
+
 }
