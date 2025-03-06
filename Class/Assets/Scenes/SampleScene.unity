@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &136051664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 136051666}
+  - component: {fileID: 136051665}
+  m_Layer: 0
+  m_Name: PathFinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &136051665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136051664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fba38a9428214d4c8ef76bbfce992de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &136051666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136051664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &283815914
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,9 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c24b7db47c7b4a47aa36345b77377fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 5
-  width: 5
-  textAsset: {fileID: 4900000, guid: 9d7183e566004af4bbd0efcea2b197f5, type: 3}
+  m_textAsset: {fileID: 4900000, guid: 9d7183e566004af4bbd0efcea2b197f5, type: 3}
 --- !u!4 &283815916
 Transform:
   m_ObjectHideFlags: 0
@@ -405,9 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39230bf4f5db47b43abd200fb5957361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeViewPrefab: {fileID: 7449388486511759304, guid: 9dbc46ba18240e74b90322aaef863c79, type: 3}
-  openColor: {r: 1, g: 1, b: 1, a: 1}
-  blockedColor: {r: 0, g: 0, b: 0, a: 1}
+  m_nodeViewPrefab: {fileID: 7449388486511759304, guid: 9dbc46ba18240e74b90322aaef863c79, type: 3}
 --- !u!1 &2004156034
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,8 +477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543f7955cb373264097d058c0ae756cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapData: {fileID: 283815915}
-  graph: {fileID: 1744194236}
+  m_mapData: {fileID: 283815915}
+  m_graph: {fileID: 1744194236}
+  m_pathFinder: {fileID: 136051665}
+  m_timeStep: 0.2
 --- !u!4 &2004156036
 Transform:
   m_ObjectHideFlags: 0

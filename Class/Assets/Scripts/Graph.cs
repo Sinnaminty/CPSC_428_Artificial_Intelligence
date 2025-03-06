@@ -11,18 +11,37 @@ public class Graph : MonoBehaviour
     int m_width;
     int m_height;
 
+    Node m_startNode;
+    Node m_goalNode;
+
     public static readonly Vector2[] allDirections =
     {
         new Vector2(0f, 1f),
-        new Vector2(1f, 1f), 
+        //new Vector2(1f, 1f),
         new Vector2(1f, 0f),
-        new Vector2(1f, -1f),
+        //new Vector2(1f, -1f),
         new Vector2(0f, -1f),
-        new Vector2(-1f, -1f),
+        //new Vector2(-1f, -1f),
         new Vector2(-1f, 0f),
-        new Vector2(-1f, 1f)
+        //new Vector2(-1f, 1f)
     };
 
+    public int getWidth()
+    {
+        return m_width;
+    }
+    public int getHeight()
+    {
+        return m_height;
+    }
+    public Node getStartNode()
+    {
+        return m_startNode;
+    }
+    public Node getGoalNode()
+    {
+        return m_goalNode;
+    }
     public void Init(int[,] mapData)
     {
         m_mapData = mapData;
@@ -34,32 +53,40 @@ public class Graph : MonoBehaviour
         {
             for (int x = 0; x < m_width; x++)
             {
-                // get the nodeType of this coord from mapData
-                NodeType nodeType = (NodeType)mapData[x, y];
-
                 // make a node object
-                Node newNode = new Node(x, y, nodeType);
+                Node newNode = new Node(x, y, (NodeType)mapData[x, y]);
 
                 // our list of nodes is updated.
                 nodes[x, y] = newNode;
-                
-                //assign position to the node ??
-                newNode.position = new Vector3(x, 0, y);
-               
-                if (nodeType == NodeType.Blocked)
+
+                //assign position to the node in the world. -y so that it looks like the map 
+                newNode.SetPosition(new Vector3(x, 0, -y));
+
+                switch (newNode.GetNodeType())
                 {
-                    walls.Add(newNode);
+                    case NodeType.Blocked:
+                        walls.Add(newNode);
+                        break;
+
+                    case NodeType.Start:
+                        m_startNode = newNode;
+                        break;
+
+                    case NodeType.Goal:
+                        m_goalNode = newNode;
+                        break;
+
                 }
             }
         }
 
-         for (int y = 0; y < m_height; y++)
+        for (int y = 0; y < m_height; y++)
         {
             for (int x = 0; x < m_width; x++)
             {
-                if (nodes[x, y].nodeType != NodeType.Blocked)
+                if (nodes[x, y].GetNodeType() != NodeType.Blocked)
                 {
-                    nodes[x,y].neighbors = GetNeighbors(x, y, nodes, allDirections);
+                    nodes[x, y].SetNeighbors(GetNeighbors(x, y, nodes, allDirections));
                 }
             }
         }
@@ -73,18 +100,15 @@ public class Graph : MonoBehaviour
     List<Node> GetNeighbors(int x, int y, Node[,] NodeArray, Vector2[] directions)
     {
         List<Node> neighborNodes = new List<Node>();
-        Debug.Log("Current Node (" + NodeArray[x, y].position.x + ", " + NodeArray[x, y].position.z + ")");
-        foreach(Vector2 dir in directions)
+        foreach (Vector2 dir in directions)
         {
             int newX = x + (int)dir.x;
             int newY = y + (int)dir.y;
-            //Debug.Log("Newx = " + newX + " Newy = " + newY);
-            if(IsWithinBounds(newX, newY) && NodeArray[newX, newY] !=null && NodeArray[newX,newY].nodeType != NodeType.Blocked)
+            if (IsWithinBounds(newX, newY) && NodeArray[newX, newY] != null && NodeArray[newX, newY].GetNodeType() != NodeType.Blocked)
             {
-                neighborNodes.Add(NodeArray[newX,newY]);
+                neighborNodes.Add(NodeArray[newX, newY]);
             }
         }
-        Debug.Log("Neighbor count " + neighborNodes.Count);
         return neighborNodes;
     }
 }

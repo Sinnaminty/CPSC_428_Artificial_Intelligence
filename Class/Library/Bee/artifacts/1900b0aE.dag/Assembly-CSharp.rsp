@@ -351,6 +351,7 @@
 "Assets/Scripts/MapData.cs"
 "Assets/Scripts/Node.cs"
 "Assets/Scripts/NodeView.cs"
+"Assets/Scripts/PathFinder.cs"
 -langversion:9.0
 
 /deterministic
