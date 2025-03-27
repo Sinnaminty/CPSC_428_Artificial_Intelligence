@@ -12,7 +12,8 @@ public enum NodeType
 
 public class Node
 {
-    // this is a single node in a graph
+    public int gScore;
+    public int hScore;
     NodeType m_nodeType = NodeType.Open;
     int m_xIndex = -1;
     int m_yIndex = -1;

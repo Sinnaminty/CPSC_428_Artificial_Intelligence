@@ -17,7 +17,6 @@ public class GameController : MonoBehaviour
             // Initialize our graph using mapData
             m_graph.Init(m_mapData.MakeMap());
 
-            // What does GetComponent do?
             GraphView graphView = m_graph.GetComponent<GraphView>();
 
             if (graphView != null)
@@ -35,7 +34,24 @@ public class GameController : MonoBehaviour
             if (m_pathFinder != null)
             {
                 m_pathFinder.Init(m_graph, graphView, startNode, goalNode);
-                StartCoroutine(m_pathFinder.SearchRoutine(m_timeStep));
+                switch (m_pathFinder.m_searchAlgorithm)
+                {
+                    case SearchAlgorithm.BFS:
+                        StartCoroutine(m_pathFinder.BFSSearchRoutine(m_timeStep));
+                        break;
+                    case SearchAlgorithm.DFS:
+                        StartCoroutine(m_pathFinder.DFSSearchRoutine(m_timeStep));
+                        break;
+                    case SearchAlgorithm.AStarManhattan:
+                        StartCoroutine(m_pathFinder.AStarManhattanSearchRoutine(m_timeStep));
+                        break;
+                    case SearchAlgorithm.AStarEuclidean:
+                        StartCoroutine(m_pathFinder.AStarEuclideanSearchRoutine(m_timeStep));
+                        break;
+                    case SearchAlgorithm.GBFS:
+                        StartCoroutine(m_pathFinder.GBFSSearchRoutine(m_timeStep));
+                        break;
+                }
             }
             else
             {

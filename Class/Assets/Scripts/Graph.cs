@@ -17,13 +17,13 @@ public class Graph : MonoBehaviour
     public static readonly Vector2[] allDirections =
     {
         new Vector2(0f, 1f),
-        //new Vector2(1f, 1f),
+        new Vector2(1f, 1f),
         new Vector2(1f, 0f),
-        //new Vector2(1f, -1f),
+        new Vector2(1f, -1f),
         new Vector2(0f, -1f),
-        //new Vector2(-1f, -1f),
+        new Vector2(-1f, -1f),
         new Vector2(-1f, 0f),
-        //new Vector2(-1f, 1f)
+        new Vector2(-1f, 1f)
     };
 
     public int getWidth()
